@@ -64,4 +64,8 @@ public class PlayerMovementTDS : MonoBehaviour
 
         }
     }
+    public void IncreaseSpeed(float amount)
+    {
+        movementSpeed += amount;
+    }
 }

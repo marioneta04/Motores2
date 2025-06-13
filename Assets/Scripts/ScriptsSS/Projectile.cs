@@ -31,6 +31,23 @@ public class Projectile : MonoBehaviour
 
             Destroy(gameObject); // Destruir la bala (no el enemigo)
         }
+        if (other.CompareTag("Breakable"))
+        {
+            BreakableBox box = other.GetComponent<BreakableBox>();
+            if (box != null)
+            {
+                box.TakeDamage(damage);
+            }
+
+            // Efectos y destrucción de la bala
+            if (impactParticles != null)
+            {
+                GameObject particles = Instantiate(impactParticles, transform.position, Quaternion.identity);
+                Destroy(particles, 2f);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
 

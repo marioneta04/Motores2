@@ -3,16 +3,16 @@ using UnityEngine.AI;
 
 public class RangedEnemy : MonoBehaviour
 {
-    public Transform player;
+    protected Transform player;
     public float stopDistance = 10f;
     public float fireRate = 1.5f;
     public GameObject projectilePrefab;
     public Transform firePoint;
 
-    private NavMeshAgent agent;
-    private float lastShotTime;
+    protected NavMeshAgent agent;
+    protected float lastShotTime;
 
-    void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
@@ -30,7 +30,7 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (player == null) return;
 
@@ -46,7 +46,7 @@ public class RangedEnemy : MonoBehaviour
         {
             // Parar y disparar
             agent.isStopped = true;
-            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z)); 
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
             if (Time.time - lastShotTime >= fireRate)
             {
@@ -56,7 +56,7 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
-    void Shoot()
+    protected void Shoot()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
