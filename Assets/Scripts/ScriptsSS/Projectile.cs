@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public float lifetime = 3f;
     public GameObject impactParticles;
+    public int damage = 1; // Cantidad de daño que hace la bala
 
     void Start()
     {
@@ -14,14 +15,21 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            // Intentar obtener el componente EnemyHealth
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+            }
 
             if (impactParticles != null)
             {
-                Instantiate(impactParticles, transform.position, Quaternion.identity);
+                GameObject particles = Instantiate(impactParticles, transform.position, Quaternion.identity);
+                Destroy(particles, 2f);
             }
-            Destroy(other.gameObject); // Destruye al enemigo
-            Destroy(gameObject);       // Destruye el proyectil
-            Destroy(Instantiate(impactParticles, transform.position, Quaternion.identity), 2f);
+
+            Destroy(gameObject); // Destruir la bala (no el enemigo)
         }
     }
 }

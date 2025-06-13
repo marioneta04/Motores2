@@ -7,12 +7,18 @@ public class EnemyProjectile : MonoBehaviour
     private Vector3 direction;
 
     public GameObject impactParticles;
-
     private bool hasHit = false;
+
+    public float lifetime = 5f; // Tiempo antes de destruir la bala
 
     public void SetDirection(Vector3 dir)
     {
         direction = dir.normalized;
+    }
+
+    void Start()
+    {
+        Destroy(gameObject, lifetime); // Destruir después de X segundos
     }
 
     void Update()
@@ -33,9 +39,7 @@ public class EnemyProjectile : MonoBehaviour
                 Instantiate(impactParticles, transform.position, Quaternion.identity);
             }
 
-            // Reiniciar escena al tocar jugador
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Destroy(gameObject);
         }
         else if (!other.CompareTag("Enemy") && !other.isTrigger)
