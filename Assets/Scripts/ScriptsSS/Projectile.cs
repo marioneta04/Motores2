@@ -4,34 +4,38 @@ public class Projectile : MonoBehaviour
 {
     public float lifetime = 3f;
     public GameObject impactParticles;
-    public int damage = 1; // Cantidad de daño que hace la bala
+    public int damage = 1;
 
-    void Start()
+    private float lifeTimer;
+
+    private void OnEnable()
     {
-        Destroy(gameObject, lifetime);
+        lifeTimer = lifetime;
+    }
+
+    void Update()
+    {
+        lifeTimer -= Time.deltaTime;
+        if (lifeTimer <= 0f)
+        {
+            DeactivateProjectile();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            // Intentar obtener el componente EnemyHealth
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage);
             }
 
-            if (impactParticles != null)
-            {
-                GameObject particles = Instantiate(impactParticles, transform.position, Quaternion.identity);
-                Destroy(particles, 2f);
-            }
-
-            Destroy(gameObject); // Destruir la bala (no el enemigo)
+            PlayImpactEffect();
+            DeactivateProjectile();
         }
-        if (other.CompareTag("Breakable"))
+        else if (other.CompareTag("Breakable"))
         {
             BreakableBox box = other.GetComponent<BreakableBox>();
             if (box != null)
@@ -39,15 +43,23 @@ public class Projectile : MonoBehaviour
                 box.TakeDamage(damage);
             }
 
-            // Efectos y destrucción de la bala
-            if (impactParticles != null)
-            {
-                GameObject particles = Instantiate(impactParticles, transform.position, Quaternion.identity);
-                Destroy(particles, 2f);
-            }
-
-            Destroy(gameObject);
+            PlayImpactEffect();
+            DeactivateProjectile();
         }
+    }
+
+    void PlayImpactEffect()
+    {
+        if (impactParticles != null)
+        {
+            GameObject particles = Instantiate(impactParticles, transform.position, Quaternion.identity);
+            Destroy(particles, 2f); // Esto está bien porque es un efecto temporal
+        }
+    }
+
+    void DeactivateProjectile()
+    {
+        gameObject.SetActive(false);
     }
 }
 

@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PortalShooter : MonoBehaviour
 {
     public GameObject portalPrefab;
     public LayerMask placementMask;
     public float maxDistance = 100f;
+
+    public CrosshairController crosshairController; // Referencia al controlador de la mira
+
+    public Material portalAMaterial;  // Material para portal A (ej: rojo)
+    public Material portalBMaterial;  // Material para portal B (ej: violeta)
 
     private Camera mainCam;
     private GameObject portalA;
@@ -15,6 +21,12 @@ public class PortalShooter : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
+
+        // Inicializar color de la mira
+        if (crosshairController != null)
+        {
+            crosshairController.SetToPortalAColor();
+        }
     }
 
     public void OnShootPortal(InputAction.CallbackContext context)
@@ -30,34 +42,44 @@ public class PortalShooter : MonoBehaviour
 
             if (placingFirstPortal)
             {
-                // Crear o mover Portal A
                 if (portalA == null)
                 {
                     portalA = Instantiate(portalPrefab, position, rotation);
+                    SetPortalMaterial(portalA, portalAMaterial);
                 }
                 else
                 {
                     portalA.transform.position = position;
                     portalA.transform.rotation = rotation;
+                    SetPortalMaterial(portalA, portalAMaterial);
                 }
             }
             else
             {
-                // Crear o mover Portal B
                 if (portalB == null)
                 {
                     portalB = Instantiate(portalPrefab, position, rotation);
+                    SetPortalMaterial(portalB, portalBMaterial);
                 }
                 else
                 {
                     portalB.transform.position = position;
                     portalB.transform.rotation = rotation;
+                    SetPortalMaterial(portalB, portalBMaterial);
                 }
             }
 
             placingFirstPortal = !placingFirstPortal;
 
-            // Si ambos existen, conectarlos
+            // Cambiar color de la mira según portal que toca colocar
+            if (crosshairController != null)
+            {
+                if (placingFirstPortal)
+                    crosshairController.SetToPortalAColor();
+                else
+                    crosshairController.SetToPortalBColor();
+            }
+
             if (portalA != null && portalB != null)
             {
                 var scriptA = portalA.GetComponent<Portals>();
@@ -66,6 +88,15 @@ public class PortalShooter : MonoBehaviour
                 scriptA.linkedPortal = portalB.transform;
                 scriptB.linkedPortal = portalA.transform;
             }
+        }
+    }
+
+    private void SetPortalMaterial(GameObject portal, Material material)
+    {
+        var renderer = portal.GetComponentInChildren<Renderer>();
+        if (renderer != null && material != null)
+        {
+            renderer.material = material;
         }
     }
 }

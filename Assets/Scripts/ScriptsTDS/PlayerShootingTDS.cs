@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingTDS : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    public BulletPool bulletPool;  // Referencia al pool de balas
     public Transform firePoint;
     public float bulletSpeed = 20f;
 
@@ -24,11 +24,18 @@ public class PlayerShootingTDS : MonoBehaviour
 
     void Shoot()
     {
-        // Direcci�n desde el jugador hacia donde mira
         Vector3 direction = (playerController.lookTarget - firePoint.position).normalized;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(direction));
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = direction * bulletSpeed;
+        // Tomamos una bala del pool
+        GameObject bullet = bulletPool.GetBullet();
+        if (bullet != null)
+        {
+            bullet.transform.position = firePoint.position;
+            bullet.transform.rotation = Quaternion.LookRotation(direction);
+
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.linearVelocity = Vector3.zero; // Reseteamos velocidad antes de asignar
+            rb.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
+        }
     }
 }
