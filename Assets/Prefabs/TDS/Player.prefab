@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 1490236253078466321}
   - component: {fileID: 1361037024983142034}
   - component: {fileID: 8610966951334456087}
+  - component: {fileID: 4033543493010538576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -297,6 +298,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 67a799d9-4501-4847-aef2-b0cf522790b6
     m_ActionName: 'Player/Shoot[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4033543493010538576}
+        m_TargetAssemblyTypeName: PortalShooter, Assembly-CSharp
+        m_MethodName: OnShootPortal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d3f6ea10-380d-4158-9499-6e6fd6c8b1bd
+    m_ActionName: 'Player/Aim[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 647f1059-3397-4480-8efc-41149f50dd89
+    m_ActionName: 'Player/ShootPortal[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -357,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7d69a004b10a14c909f39a6ee85882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7731930304971377042, guid: 22c70e26f7e9b604c98df951ff3a7004, type: 3}
+  bulletPool: {fileID: 0}
   firePoint: {fileID: 2160630888752494947}
   bulletSpeed: 20
 --- !u!114 &8610966951334456087
@@ -374,3 +395,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHits: 2
   instantDeathFromProjectiles: 1
+--- !u!114 &4033543493010538576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275757377013639647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb047fdc444aa7f4ab5980b02b617942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalPrefab: {fileID: 7365714355921067628, guid: cff58c2d6a2818a45a7d3144b534e096, type: 3}
+  placementMask:
+    serializedVersion: 2
+    m_Bits: 64
+  maxDistance: 100
+  crosshairController: {fileID: 0}
+  portalAMaterial: {fileID: 2100000, guid: 9e799e6b7c9c1614f82c8bdca69e9565, type: 2}
+  portalBMaterial: {fileID: 2100000, guid: b3c4780cc0a558444ae165e3cfacecfe, type: 2}

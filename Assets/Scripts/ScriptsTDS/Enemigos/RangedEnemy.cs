@@ -8,6 +8,7 @@ public class RangedEnemy : MonoBehaviour
     public float fireRate = 1.5f;
     public GameObject projectilePrefab;
     public Transform firePoint;
+   
 
     protected NavMeshAgent agent;
     protected float lastShotTime;
@@ -58,14 +59,26 @@ public class RangedEnemy : MonoBehaviour
 
     protected void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-
-        Vector3 dirToPlayer = (player.position - firePoint.position).normalized;
-
-        EnemyProjectile projScript = projectile.GetComponent<EnemyProjectile>();
-        if (projScript != null)
+        if (EnemyProjectilePool.Instance == null)
         {
-            projScript.SetDirection(dirToPlayer);
+            Debug.LogWarning("No se encontró una instancia de EnemyProjectilePool en la escena.");
+            return;
+        }
+
+        GameObject projectile = EnemyProjectilePool.Instance.GetProjectile();
+
+        if (projectile != null)
+        {
+            projectile.transform.position = firePoint.position;
+            projectile.transform.rotation = Quaternion.identity;
+
+            Vector3 dirToPlayer = (player.position - firePoint.position).normalized;
+
+            EnemyProjectile projScript = projectile.GetComponent<EnemyProjectile>();
+            if (projScript != null)
+            {
+                projScript.SetDirection(dirToPlayer);
+            }
         }
     }
 }
