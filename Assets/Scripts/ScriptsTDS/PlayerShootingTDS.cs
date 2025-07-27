@@ -8,15 +8,17 @@ public class PlayerShootingTDS : MonoBehaviour
     public float bulletSpeed = 20f;
 
     private PlayerMovementTDS playerController;
+    private bool canShoot = false;  // Al principio no puede disparar
 
     void Awake()
     {
         playerController = GetComponent<PlayerMovementTDS>();
+        canShoot = false;  // Lo dejamos sin disparar hasta que agarre el objeto
     }
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && canShoot && bulletPool != null)
         {
             Shoot();
         }
@@ -26,7 +28,6 @@ public class PlayerShootingTDS : MonoBehaviour
     {
         Vector3 direction = (playerController.lookTarget - firePoint.position).normalized;
 
-        // Tomamos una bala del pool
         GameObject bullet = bulletPool.GetBullet();
         if (bullet != null)
         {
@@ -34,8 +35,15 @@ public class PlayerShootingTDS : MonoBehaviour
             bullet.transform.rotation = Quaternion.LookRotation(direction);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.linearVelocity = Vector3.zero; // Reseteamos velocidad antes de asignar
+            rb.linearVelocity = Vector3.zero;
             rb.AddForce(direction * bulletSpeed, ForceMode.VelocityChange);
         }
+    }
+
+    // Llamalo cuando el jugador recoja munici�n
+    public void EnableShooting(BulletPool pool)
+    {
+        bulletPool = pool;
+        canShoot = true;
     }
 }
