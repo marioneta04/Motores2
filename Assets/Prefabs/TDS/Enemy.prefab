@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 1367806601756859259}
   - component: {fileID: 6173218046096760525}
   - component: {fileID: -4040774149670724451}
-  - component: {fileID: -7018734408293978443}
-  - component: {fileID: -6738048159019671287}
   - component: {fileID: -566800205715250324}
+  - component: {fileID: 6353522433463477878}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -136,31 +135,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-7018734408293978443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398292900085663119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac8d8fb8c955b846b852202eba7713a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
---- !u!114 &-6738048159019671287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398292900085663119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a827fe32e1407e94f84229087a84018a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-566800205715250324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,4 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  healthBarUI: {fileID: 0}
+--- !u!114 &6353522433463477878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398292900085663119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19ded0ace5250043a29a2a7ecd5d1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public class StationaryShooter : RangedEnemy
+public class StationaryShooter :RangedEnemy
 {
     protected override void Start()
     {
-        base.Start(); 
-        agent.isStopped = true; 
+        base.Start();
+        agent.isStopped = true; // No se mueve nunca
     }
 
-    void Update()
+    protected override void Act()
     {
         if (player == null) return;
 
-        
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance <= stopDistance)

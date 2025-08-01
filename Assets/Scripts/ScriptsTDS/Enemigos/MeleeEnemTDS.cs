@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class MeleeEnemTDS : EnemyBase
 {
     private float attackCooldown = 1f;
     private float lastAttackTime = 0f;
+
+    protected override void Act()
+    {
+        agent.SetDestination(player.position);
+    }
 
     void OnTriggerStay(Collider other)
     {
