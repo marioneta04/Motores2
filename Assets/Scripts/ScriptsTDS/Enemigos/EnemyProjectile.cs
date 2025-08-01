@@ -34,7 +34,7 @@ public class EnemyProjectile : Projectile
         {
             hasHit = true;
             PlayImpactEffect();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(1);
             DeactivateProjectile();  // Desactiva la bala en vez de destruirla
         }
         else if (!other.CompareTag("Enemy") && !other.isTrigger)

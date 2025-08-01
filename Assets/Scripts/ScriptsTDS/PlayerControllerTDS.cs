@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerControllerTDS : MonoBehaviour
 {
+
     private bool isFree = false;
 
     public bool IsFree => isFree;

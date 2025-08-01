@@ -35,6 +35,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("El jugador ha muerto.");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1); // Cambia 1 por el índice de tu escena Game Over si es diferente
     }
 }

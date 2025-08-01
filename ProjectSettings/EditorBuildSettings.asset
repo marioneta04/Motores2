@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ScrollingShooter.unity
     guid: 12926376a36144f468fbf5b5f3bbd836
+  - enabled: 1
+    path: Assets/Scenes/TopDownShooter.unity
+    guid: 57a7b95bb0e21574fb5c009710cafdfe
+  - enabled: 1
+    path: Assets/Scenes/PerderTDS.unity
+    guid: 830580e5d744f1a44a94950406fdd359
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
