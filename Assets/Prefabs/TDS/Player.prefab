@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 1361037024983142034}
   - component: {fileID: 8610966951334456087}
   - component: {fileID: 4033543493010538576}
+  - component: {fileID: 6833014727481713750}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -415,3 +416,15 @@ MonoBehaviour:
   crosshairController: {fileID: 0}
   portalAMaterial: {fileID: 2100000, guid: 9e799e6b7c9c1614f82c8bdca69e9565, type: 2}
   portalBMaterial: {fileID: 2100000, guid: b3c4780cc0a558444ae165e3cfacecfe, type: 2}
+--- !u!114 &6833014727481713750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275757377013639647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948fb062ac63a2342ae82b2777da4292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

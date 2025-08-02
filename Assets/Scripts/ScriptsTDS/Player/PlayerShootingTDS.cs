@@ -3,24 +3,30 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootingTDS : MonoBehaviour
 {
-    public BulletPool bulletPool;  // Referencia al pool de balas
+    public BulletPool bulletPool;
     public Transform firePoint;
     public float bulletSpeed = 20f;
+    public float fireCooldown = 0.5f; // Tiempo entre disparos
 
     private PlayerMovementTDS playerController;
-    private bool canShoot = false;  // Al principio no puede disparar
+    private bool canShoot = false;
+    private float lastFireTime = 0f; // Momento del último disparo
 
     void Awake()
     {
         playerController = GetComponent<PlayerMovementTDS>();
-        canShoot = false;  // Lo dejamos sin disparar hasta que agarre el objeto
+        canShoot = false;
     }
 
     public void OnFire(InputAction.CallbackContext context)
     {
         if (context.started && canShoot && bulletPool != null)
         {
-            Shoot();
+            if (Time.time >= lastFireTime + fireCooldown)
+            {
+                Shoot();
+                lastFireTime = Time.time; // Actualiza el tiempo del último disparo
+            }
         }
     }
 
@@ -40,7 +46,6 @@ public class PlayerShootingTDS : MonoBehaviour
         }
     }
 
-    // Llamalo cuando el jugador recoja munici�n
     public void EnableShooting(BulletPool pool)
     {
         bulletPool = pool;
