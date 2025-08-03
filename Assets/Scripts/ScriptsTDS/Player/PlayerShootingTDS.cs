@@ -51,4 +51,9 @@ public class PlayerShootingTDS : MonoBehaviour
         bulletPool = pool;
         canShoot = true;
     }
+
+    public void SetCooldown(float newCooldown)
+    {
+        fireCooldown = newCooldown;
+    }
 }

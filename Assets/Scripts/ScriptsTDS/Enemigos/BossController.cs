@@ -8,23 +8,35 @@ public class BossController : MonoBehaviour
     private int currentHealth;
 
     [Header("Invocación")]
-    public GameObject enemyPrefab;
-    public Transform[] summonPoints; // puntos desde donde invoca
+    public GameObject[] enemyPrefabs;
+    public Transform[] summonPoints;
     public float summonInterval = 8f;
     private float lastSummonTime;
 
     [Header("Furia")]
     public bool enraged = false;
 
+    private bool isActive = false;
+
     void Start()
     {
         currentHealth = maxHealth;
+        isActive = false; // No empieza activo
     }
 
     void Update()
     {
+        if (!isActive)
+        {
+            Debug.Log(" Boss aún no activo");
+            return;
+        }
+
+        Debug.Log(" Boss activo, corriendo Update");
+
         if (Time.time - lastSummonTime >= summonInterval)
         {
+            Debug.Log(" Intentando invocar enemigos...");
             SummonEnemies();
             lastSummonTime = Time.time;
         }
@@ -37,18 +49,19 @@ public class BossController : MonoBehaviour
 
     void SummonEnemies()
     {
+        Debug.Log(" Invocando enemigos");
         int summonCount = Mathf.Min(3, summonPoints.Length);
 
         for (int i = 0; i < summonCount; i++)
         {
-            Instantiate(enemyPrefab, summonPoints[i].position, Quaternion.identity);
+            GameObject prefabToSummon = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            Instantiate(prefabToSummon, summonPoints[i].position, Quaternion.identity);
         }
     }
 
     void EnterRageMode()
     {
         enraged = true;
-        // Si querés podés agregar otros cambios aquí para cuando se enrage.
         Renderer rend = GetComponent<Renderer>();
         if (rend != null)
             rend.material.color = Color.red;
@@ -68,5 +81,11 @@ public class BossController : MonoBehaviour
     {
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ActivateBoss()
+    {
+        isActive = true;
+        Debug.Log(" ActivateBoss llamado correctamente");
     }
 }

@@ -17,9 +17,16 @@ public class BossTriggerZone : MonoBehaviour
             triggered = true;
 
             if (boss != null)
+            {
                 boss.SetActive(true);
 
-            gameObject.SetActive(false); 
+                // Llamar a ActivateBoss si el componente BossController está en el objeto
+                BossController bossController = boss.GetComponent<BossController>();
+                if (bossController != null)
+                    bossController.ActivateBoss();
+            }
+
+            gameObject.SetActive(false);
         }
     }
 }
