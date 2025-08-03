@@ -20,7 +20,7 @@ public class BossTriggerZone : MonoBehaviour
             {
                 boss.SetActive(true);
 
-                // Llamar a ActivateBoss si el componente BossController está en el objeto
+                // Activar comportamiento del boss
                 BossController bossController = boss.GetComponent<BossController>();
                 if (bossController != null)
                     bossController.ActivateBoss();

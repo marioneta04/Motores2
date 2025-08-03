@@ -86,6 +86,7 @@ public class BossController : MonoBehaviour
     public void ActivateBoss()
     {
         isActive = true;
-        Debug.Log(" ActivateBoss llamado correctamente");
+        lastSummonTime = Time.time; // Inicializa el temporizador de invocación aquí
+        Debug.Log("ActivateBoss llamado correctamente, el temporizador de invocación ha sido inicializado.");
     }
 }

@@ -55,7 +55,7 @@ public class PlayerMovementTDS : MonoBehaviour
     {
 
         mousePosition = context.ReadValue<Vector2>();
-        Debug.Log("Mouse Postion: " + mousePosition);
+        
 
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
