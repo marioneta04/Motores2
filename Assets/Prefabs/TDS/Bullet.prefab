@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2113074721950342333}
   - component: {fileID: -5160416403236916257}
   - component: {fileID: -6647561728443708620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397b166f271c78542be9e08b85a9c77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 0.7
   impactParticles: {fileID: 3176630179001830531, guid: 975042230ae73024480a38467f190540, type: 3}
   damage: 1

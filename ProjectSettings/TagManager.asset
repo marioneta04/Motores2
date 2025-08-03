@@ -9,6 +9,8 @@ TagManager:
   - Breakable
   - Wall
   - PortalSurface
+  - EnemyShield
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Water
   - UI
   - PortalSurface
-  - 
-  - 
-  - 
+  - PlayerBullet
+  - EnemyBullet
+  - Shield
   - 
   - 
   - 

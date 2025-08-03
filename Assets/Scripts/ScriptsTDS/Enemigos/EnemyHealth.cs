@@ -3,18 +3,18 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 5;
-    private int currentHealth;
+    protected int currentHealth; // <-- antes era privado
 
-    private EnemyHealthBar healthBarUI;
+    protected EnemyHealthBar healthBarUI;
 
-    void Start()
+    protected virtual void Start() // <-- cambiamos a protected virtual
     {
         currentHealth = maxHealth;
         healthBarUI = EnemyHealthManager.Instance.AssignBarToEnemy(this);
         UpdateHealthUI();
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage) // <-- también virtual
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void UpdateHealthUI()
+    protected void UpdateHealthUI()
     {
         if (healthBarUI != null)
         {
@@ -34,7 +34,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         if (healthBarUI != null)
         {

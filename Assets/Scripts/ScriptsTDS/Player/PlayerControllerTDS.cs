@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerTDS : MonoBehaviour
 {
-    public bool hasKey = false;
     private bool isFree = false;
-
     public bool IsFree => isFree;
+
+    private HashSet<string> collectedKeys = new HashSet<string>();
 
     public void SetFree()
     {
@@ -13,8 +14,17 @@ public class PlayerControllerTDS : MonoBehaviour
         Debug.Log("Jugador liberado de la prisión");
     }
 
-    public void CollectKey()
+    public void CollectKey(string keyID)
     {
-        hasKey = true;
+        if (!collectedKeys.Contains(keyID))
+        {
+            collectedKeys.Add(keyID);
+            Debug.Log("Llave obtenida: " + keyID);
+        }
+    }
+
+    public bool HasKey(string keyID)
+    {
+        return collectedKeys.Contains(keyID);
     }
 }

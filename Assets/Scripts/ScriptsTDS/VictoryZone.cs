@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class KeyPickup : MonoBehaviour
+public class VictoryZone : MonoBehaviour
 {
-    public string keyID; // ejemplo: "mainDoor", "bossDoor"
-
     private void OnTriggerEnter(Collider other)
     {
         PlayerControllerTDS player = other.GetComponent<PlayerControllerTDS>();
         if (player != null)
         {
-            player.CollectKey(keyID);
-            Destroy(gameObject);
+            SceneManager.LoadScene(2); // Cambia a la escena de victoria
         }
     }
 }

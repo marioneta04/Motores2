@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PerderTDS.unity
     guid: 830580e5d744f1a44a94950406fdd359
+  - enabled: 1
+    path: Assets/Scenes/GanarTDS.unity
+    guid: 77b43637759aa504a84479c11b586c50
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

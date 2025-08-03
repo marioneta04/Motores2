@@ -4,6 +4,15 @@ public class PlayerProjectile : Projectile
 {
     protected override void OnTriggerEnter(Collider other)
     {
+        // 1. Bloquear con escudo
+        if (other.CompareTag("EnemyShield"))
+        {
+            PlayImpactEffect();
+            DeactivateProjectile();
+            return;
+        }
+
+        // 2. Dañar enemigo
         if (other.CompareTag("Enemy"))
         {
             var enemyHealth = other.GetComponent<EnemyHealth>();
@@ -15,6 +24,7 @@ public class PlayerProjectile : Projectile
             PlayImpactEffect();
             DeactivateProjectile();
         }
+        // 3. Romper cajas
         else if (other.CompareTag("Breakable"))
         {
             var box = other.GetComponent<BreakableBox>();
@@ -26,6 +36,7 @@ public class PlayerProjectile : Projectile
             PlayImpactEffect();
             DeactivateProjectile();
         }
+        // 4. Paredes
         else if (other.CompareTag("Wall"))
         {
             PlayImpactEffect();
